@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/AntOn2415/car-rental/static/css/main.7acaea2f.css",
+    "main.js": "/AntOn2415/car-rental/static/js/main.a9c9f5d4.js",
+    "index.html": "/AntOn2415/car-rental/index.html",
+    "main.7acaea2f.css.map": "/AntOn2415/car-rental/static/css/main.7acaea2f.css.map",
+    "main.a9c9f5d4.js.map": "/AntOn2415/car-rental/static/js/main.a9c9f5d4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.a9c9f5d4.js"
+  ]
+}
