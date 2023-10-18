@@ -1,0 +1,3 @@
+files:
+  - source: /car-rental/blob/main/README.md
+    translation: car-rental/%two_letters_code%/%original_file_name%
