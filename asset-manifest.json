@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/AntOn2415/car-rental/static/css/main.7acaea2f.css",
+    "main.css": "/AntOn2415/car-rental/static/css/main.e336221d.css",
     "main.js": "/AntOn2415/car-rental/static/js/main.e4591b69.js",
     "static/js/813.f23ea0be.chunk.js": "/AntOn2415/car-rental/static/js/813.f23ea0be.chunk.js",
     "static/js/92.a69e93a5.chunk.js": "/AntOn2415/car-rental/static/js/92.a69e93a5.chunk.js",
     "static/js/786.989c3c02.chunk.js": "/AntOn2415/car-rental/static/js/786.989c3c02.chunk.js",
     "static/media/logo.png": "/AntOn2415/car-rental/static/media/logo.179afd6fd2918d5a84c1.png",
     "index.html": "/AntOn2415/car-rental/index.html",
-    "main.7acaea2f.css.map": "/AntOn2415/car-rental/static/css/main.7acaea2f.css.map",
+    "main.e336221d.css.map": "/AntOn2415/car-rental/static/css/main.e336221d.css.map",
     "main.e4591b69.js.map": "/AntOn2415/car-rental/static/js/main.e4591b69.js.map",
     "813.f23ea0be.chunk.js.map": "/AntOn2415/car-rental/static/js/813.f23ea0be.chunk.js.map",
     "92.a69e93a5.chunk.js.map": "/AntOn2415/car-rental/static/js/92.a69e93a5.chunk.js.map",
     "786.989c3c02.chunk.js.map": "/AntOn2415/car-rental/static/js/786.989c3c02.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
+    "static/css/main.e336221d.css",
     "static/js/main.e4591b69.js"
   ]
 }
