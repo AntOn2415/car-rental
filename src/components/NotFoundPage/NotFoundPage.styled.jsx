@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ContainerDiv = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ export const ContainerDiv = styled.div`
   gap: 15px;
   margin: auto;
   flex-direction: column;
-  padding: 30px 15px;
+  padding: 30px;
   border-color: #777;
 `;
 

@@ -1,4 +1,5 @@
-import { Navigation } from "../Navigation/Navigation";
+import Navigation from "../Navigation/Navigation";
+import HeaderControls from "../HeaderControls";
 
 import { Header, HeaderContainer } from "./AppBar.styled";
 
@@ -7,6 +8,7 @@ export const AppBar = () => {
     <Header>
       <HeaderContainer>
         <Navigation />
+        <HeaderControls />
       </HeaderContainer>
     </Header>
   );

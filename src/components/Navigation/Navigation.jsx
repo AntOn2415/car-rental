@@ -1,17 +1,24 @@
 import React from "react";
-import { NavUl, NavLi, StyledLink, ImgContainerDiv, Img } from "./Navigation.styled";
+import {
+  NavUl,
+  NavLi,
+  StyledLinkLogo,
+  StyledLink,
+  ImgContainerDiv,
+  Img,
+} from "./Navigation.styled";
 import Logo from "images/logo.png";
 
-export const Navigation = () => {
+const Navigation = () => {
   return (
     <nav>
       <NavUl>
         <NavLi>
-          <StyledLink to="/">
+          <StyledLinkLogo to="/">
             <ImgContainerDiv>
               <Img src={Logo} alt="Auto Rental Logo" />
             </ImgContainerDiv>
-          </StyledLink>
+          </StyledLinkLogo>
         </NavLi>
         <NavLi>
           <StyledLink to="/catalog">Catalog</StyledLink>
@@ -23,3 +30,5 @@ export const Navigation = () => {
     </nav>
   );
 };
+
+export default Navigation;

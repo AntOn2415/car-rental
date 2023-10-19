@@ -5,8 +5,7 @@ export const ImgContainerDiv = styled.div`
   /* display: flex; */
 `;
 export const Img = styled.img`
-  /* display: flex; */
-  width: 100px;
+  width: 140px;
   height: 100%;
 `;
 
@@ -14,26 +13,28 @@ export const NavUl = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 `;
 
 export const NavLi = styled.li`
-  font-size: 24px;
+  font-size: 16px;
+`;
+
+export const StyledLinkLogo = styled(NavLink)`
+  display: flex;
+  padding: 11px 0;
+  text-decoration: none;
 `;
 
 export const StyledLink = styled(NavLink)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
   text-decoration: none;
   color: #343434;
-  padding: 20px 0;
+  padding: 29px 0;
   transition: color 300ms ease;
 
-  :hover,
-  :focus,
-  :active {
+  &:hover,
+  &:focus,
+  &:active {
     color: #0b44cd;
   }
 
