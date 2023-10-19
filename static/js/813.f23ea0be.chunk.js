@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkcar_rental=self.webpackChunkcar_rental||[]).push([[813],{520:function(n,t,e){e.r(t),e.d(t,{default:function(){return l}});var r,a=e(168),i=e(867).ZP.div(r||(r=(0,a.Z)(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  gap: 30px;\n  margin: auto;\n  width: 100%;\n  height: 100vh;\n"]))),u=e(184),c=function(){return(0,u.jsx)(i,{children:"Auto Rental Catalog"})};function l(){return(0,u.jsx)(c,{})}}}]);
-//# sourceMappingURL=813.f23ea0be.chunk.js.map
