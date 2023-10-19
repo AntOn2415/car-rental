@@ -5,6 +5,7 @@ export const ContainerDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: "Manrope", sans-serif;
   gap: 30px;
   margin: auto;
   width: 100%;
