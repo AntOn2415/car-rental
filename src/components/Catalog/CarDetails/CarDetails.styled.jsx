@@ -121,13 +121,13 @@ export const ConditionsDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  width: 400px;
   gap: 8px;
   margin-top: 8px;
 `;
 
 export const ConditionP = styled.p`
   display: flex;
-  /* flex-wrap: nowrap; */
   padding: 7px 14px;
   font-size: 12px;
   font-style: normal;
