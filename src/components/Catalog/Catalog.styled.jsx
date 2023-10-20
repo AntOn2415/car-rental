@@ -1,17 +1,11 @@
 import styled from "styled-components";
 
-export const ContainerDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  margin: auto;
-  width: 100%;
-  height: 100vh;
+export const Section = styled.section`
+  padding-top: 50px;
 `;
 
 export const Btn = styled.button`
+  display: flex;
   padding: 0;
   border: none;
   background: none;
@@ -22,4 +16,6 @@ export const Btn = styled.button`
   font-weight: 500;
   line-height: calc(24 / 16); /* 150% */
   text-decoration-line: underline;
+  margin: 100px auto 150px auto;
+  cursor: pointer;
 `;
