@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "../../Modal";
+import CarDetails from "../CarDetails";
 
 import {
   CatalogLi,
@@ -85,7 +86,7 @@ const CatalogItem = ({ carCard }) => {
       </CardContainer>
       {isOpenModal && (
         <Modal onCloseModal={handleCloseModal}>
-          {/* <CarDetails carCard={carCard} onCloseModal={handleCloseModal} /> */}
+          <CarDetails carCard={carCard} onCloseModal={handleCloseModal} />
         </Modal>
       )}
     </CatalogLi>

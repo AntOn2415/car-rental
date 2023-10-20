@@ -1,18 +1,14 @@
 import styled from "styled-components";
 
-export const CatalogLi = styled.li`
-  display: flex;
-`;
-
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 274px;
+  padding: 40px;
 `;
 
 export const ImageContainer = styled.div`
-  width: 274px;
-  height: 268px;
+  width: 461px;
+  height: 248px;
   border-radius: 14px;
 `;
 
@@ -55,20 +51,12 @@ export const YearP = styled.p`
   line-height: calc(24 / 16);
 `;
 
-export const PriceP = styled.p`
-  color: #121417;
-
-  font-size: 16px;
-  font-weight: 500;
-  line-height: calc(24 / 16);
-  margin-left: auto;
-`;
-
 export const CarSnapshotDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
   column-gap: 6px;
   row-gap: 4px;
+  width: 380px;
   height: 40px;
   margin-top: 8px;
   overflow: hidden;
@@ -89,19 +77,86 @@ export const DetailP = styled.p`
   }
 `;
 
-export const Btn = styled.button`
+export const HiddenH3 = styled.h3`
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
+`;
+
+export const DescriptionP = styled.p`
+  margin-top: 14px;
+  color: #121417;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: calc(20 / 14);
+`;
+
+export const H3 = styled.h3`
+  margin-top: 24px;
+  color: #121417;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: calc(20 / 14);
+`;
+
+export const ExtraInfoDiv = styled.div`
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 6px;
+  row-gap: 4px;
+  margin-top: 8px;
+  overflow: hidden;
+`;
+
+export const ConditionsDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  border: none;
-  height: 44px;
-  padding: 12px 99px;
-  margin-top: 28px;
-  flex-shrink: 0;
+  gap: 8px;
+  margin-top: 8px;
+`;
+
+export const ConditionP = styled.p`
+  display: flex;
+  /* flex-wrap: nowrap; */
+  padding: 7px 14px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: calc(18 / 12);
+  border-radius: 35px;
+  background: #f9f9f9;
+  color: #363535;
+`;
+
+export const ConditionSpan = styled.span`
+  color: #3470ff;
+`;
+
+export const LinkA = styled.a`
+  display: inline-flex;
+  padding: 12px 50px;
+  margin-top: 24px;
+  margin-right: auto;
+  align-items: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: calc(20 / 14);
   border-radius: 12px;
   background: #3470ff;
   color: #fff;
   cursor: pointer;
+  text-decoration: none;
 
   transition: background 300ms ease;
 

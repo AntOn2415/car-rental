@@ -14,7 +14,7 @@ export const ModalBackdrop = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #343434;
+  background: rgba(18, 20, 23, 0.5);
   backdrop-filter: blur(1px);
   z-index: 998;
   overflow-y: scroll;
@@ -25,23 +25,13 @@ export const ModalBackdrop = styled.div`
 
 export const ModalDiv = styled.div`
   position: absolute;
-  padding: 60px 20px;
-  min-width: calc(100vw - 100px);
-  min-height: calc(100vh - 300px);
-  border-radius: 18px;
-  border: 1px solid #111;
+  width: 541px;
+  height: 752px;
+  border-radius: 24px;
+  background: #fff;
+  overflow: scroll;
 
   animation: 300ms ${zoomInAnimation};
-
-  @media screen and (min-width: 668px) {
-    min-width: calc(100vw - 400px);
-    min-height: calc(100vh - 400px);
-  }
-
-  @media screen and (min-width: 1200px) {
-    min-width: calc(100vw - 900px);
-    min-height: calc(100vh - 500px);
-  }
 `;
 
 export const CloseBtn = styled.button`

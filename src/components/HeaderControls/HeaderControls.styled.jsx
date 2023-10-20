@@ -40,5 +40,5 @@ export const LinkA = styled.a`
   text-decoration: none;
   color: #fff;
   font-size: 16px;
-  z-index: 999;
+  z-index: 9;
 `;
