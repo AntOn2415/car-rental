@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
-import { RiCloseCircleLine } from "react-icons/ri";
+import close from "../../images/icons.svg";
 import { createPortal } from "react-dom";
 import { ModalBackdrop, ModalDiv, CloseBtn } from "./Modal.styled";
 
@@ -26,8 +26,10 @@ function Modal({ children, onCloseModal, isOpenModal }) {
   return createPortal(
     <ModalBackdrop onClick={onCloseModal}>
       <ModalDiv onClick={handleContentClick}>
-        <CloseBtn type="button" onClick={onCloseModal}>
-          <RiCloseCircleLine />
+        <CloseBtn type="button" aria-label="close button" onClick={onCloseModal}>
+          <svg width="24" height="24">
+            <use href={`${close}#icon-x`} />
+          </svg>
         </CloseBtn>
         {children}
       </ModalDiv>

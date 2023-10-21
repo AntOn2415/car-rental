@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import autoDefault from "images/auto-default1.png";
 
 export const CatalogLi = styled.li`
   display: flex;
@@ -11,9 +12,45 @@ export const CardContainer = styled.div`
 `;
 
 export const ImageContainer = styled.div`
+  position: relative;
+  color: #343434;
   width: 274px;
   height: 268px;
   border-radius: 14px;
+  background: linear-gradient(180deg, rgba(18, 20, 23, 0.5) 2.5%, rgba(18, 20, 23, 0) 41.07%),
+    url(${autoDefault}) lightgray 50% / cover no-repeat;
+`;
+
+export const ToggleEventBtn = styled.button`
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  font-size: 60px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  stroke: ${props =>
+    props["data-is-favorite"] ? "rgba(52, 112, 255, 1)" : "rgba(255, 255, 255, 0.8)"};
+  fill: ${props => (props["data-is-favorite"] ? "rgba(52, 112, 255, 1)" : "transparent")};
+
+  svg {
+    use {
+      transition: stroke 300ms ease, fill 300ms ease;
+    }
+  }
+
+  &:hover svg use {
+    fill: #fff;
+  }
 `;
 
 export const Img = styled.img`
@@ -24,10 +61,12 @@ export const Img = styled.img`
 `;
 
 export const DefaultDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(18, 20, 23, 0.5) 2.5%, rgba(18, 20, 23, 0) 41.07%),
-    url(<path-to-image>), lightgray 50% / cover no-repeat;
+  border-radius: 14px;
 `;
 
 export const CarBriefInfo = styled.div`
@@ -36,6 +75,10 @@ export const CarBriefInfo = styled.div`
 `;
 
 export const H2 = styled.h2`
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: #121417;
 
   font-size: 16px;

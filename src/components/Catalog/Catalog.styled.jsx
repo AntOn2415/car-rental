@@ -18,4 +18,12 @@ export const Btn = styled.button`
   text-decoration-line: underline;
   margin: 100px auto 150px auto;
   cursor: pointer;
+
+  transition: color 300ms ease;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: #0b44cd;
+  }
 `;

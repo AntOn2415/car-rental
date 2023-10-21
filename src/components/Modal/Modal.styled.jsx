@@ -36,8 +36,8 @@ export const ModalDiv = styled.div`
 
 export const CloseBtn = styled.button`
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 16px;
+  right: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,16 +45,15 @@ export const CloseBtn = styled.button`
   height: 24px;
   padding: 0;
   margin: 0;
-  border-radius: 50%;
   background: inherit;
   font-size: 60px;
-  color: green;
+  stroke: #121417;
   outline: none;
   border: none;
-  transition: box-shadow 300ms, background-color 300ms, color 300ms ease;
+  transition: stroke 300ms ease;
 
   :hover,
   :focus {
-    color: red;
+    stroke: #3470ff;
   }
 `;

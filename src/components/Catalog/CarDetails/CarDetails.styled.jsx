@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import autoDefault from "images/auto-default1.png";
 
 export const CardContainer = styled.div`
   display: flex;
@@ -7,23 +8,29 @@ export const CardContainer = styled.div`
 `;
 
 export const ImageContainer = styled.div`
+  color: #343434;
   width: 461px;
   height: 248px;
   border-radius: 14px;
+  background: linear-gradient(180deg, rgba(18, 20, 23, 0.5) 2.5%, rgba(18, 20, 23, 0) 41.07%),
+    url(${autoDefault}) lightgray 50% / cover no-repeat;
 `;
 
 export const Img = styled.img`
   width: 100%;
   height: 100%;
+  border-radius: 14px;
   object-fit: cover;
   border-radius: 14px;
 `;
 
 export const DefaultDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(18, 20, 23, 0.5) 2.5%, rgba(18, 20, 23, 0) 41.07%),
-    url(<path-to-image>), lightgray 50% / cover no-repeat;
+  border-radius: 14px;
 `;
 
 export const CarBriefInfo = styled.div`
@@ -33,7 +40,6 @@ export const CarBriefInfo = styled.div`
 
 export const H2 = styled.h2`
   color: #121417;
-
   font-size: 16px;
   font-weight: 500;
   line-height: calc(24 / 16);

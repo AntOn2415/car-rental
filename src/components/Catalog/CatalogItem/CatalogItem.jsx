@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "../../Modal";
 import CarDetails from "../CarDetails";
+import hart from "../../../images/icons.svg";
 
 import {
   CatalogLi,
   CardContainer,
   ImageContainer,
+  ToggleEventBtn,
   Img,
   DefaultDiv,
   CarBriefInfo,
@@ -20,16 +22,41 @@ import {
 
 const CatalogItem = ({ carCard }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  if (!carCard) {
-    return null;
-  }
+  useEffect(() => {
+    const favorites = getFavoritesFromStorage();
+    setIsFavorite(favorites.includes(carCard.id));
+  }, [carCard]);
 
   function getRandomValue(arr1, arr2) {
     const randomArray = Math.random() < 0.5 ? arr1 : arr2;
     const randomIndex = Math.floor(Math.random() * randomArray.length);
     return randomArray[randomIndex];
   }
+
+  const getFavoritesFromStorage = () => {
+    const favorites = localStorage.getItem("favorites");
+    return favorites ? JSON.parse(favorites) : [];
+  };
+
+  const saveFavoritesToStorage = favorites => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  };
+
+  const toggleFavorite = carId => {
+    const favorites = getFavoritesFromStorage();
+
+    if (favorites.includes(carId)) {
+      const updatedFavorites = favorites.filter(id => id !== carId);
+      saveFavoritesToStorage(updatedFavorites);
+    } else {
+      const updatedFavorites = [...favorites, carId];
+      saveFavoritesToStorage(updatedFavorites);
+    }
+
+    setIsFavorite(!isFavorite);
+  };
 
   const handleButtonClick = () => {
     setIsOpenModal(true);
@@ -54,14 +81,23 @@ const CatalogItem = ({ carCard }) => {
   } = carCard;
 
   const randomFeature = getRandomValue(accessories, functionalities);
-
   const addressParts = carCard.address.split(", ");
 
   return (
     <CatalogLi>
       <CardContainer>
         <ImageContainer>
-          {img ? <Img src={img} alt={make} /> : <DefaultDiv>No Image</DefaultDiv>}
+          <ToggleEventBtn
+            type="button"
+            onClick={() => toggleFavorite(carCard.id)}
+            data-is-favorite={isFavorite}
+          >
+            <svg width="18" height="18">
+              <use href={`${hart}#icon-hart`} />
+            </svg>
+          </ToggleEventBtn>
+
+          {img ? <Img src={img} alt={make} /> : <DefaultDiv>{make}</DefaultDiv>}
         </ImageContainer>
         <CarBriefInfo>
           <H2>
@@ -85,7 +121,7 @@ const CatalogItem = ({ carCard }) => {
         </Btn>
       </CardContainer>
       {isOpenModal && (
-        <Modal onCloseModal={handleCloseModal}>
+        <Modal isOpenModal={isOpenModal} onCloseModal={handleCloseModal}>
           <CarDetails carCard={carCard} onCloseModal={handleCloseModal} />
         </Modal>
       )}

@@ -52,7 +52,7 @@ const CarDetails = ({ carCard }) => {
   return (
     <CardContainer>
       <ImageContainer>
-        {img ? <Img src={img} alt={make} /> : <DefaultDiv>No Image</DefaultDiv>}
+        {img ? <Img src={img} alt={make} /> : <DefaultDiv>{make}</DefaultDiv>}
       </ImageContainer>
       <CarBriefInfo>
         <H2>
@@ -74,7 +74,7 @@ const CarDetails = ({ carCard }) => {
       <H3>Accessories and functionalities:</H3>
       <ExtraInfoDiv>
         {mergedArray.map(extra => (
-          <DetailP key={nanoid}>{extra}</DetailP>
+          <DetailP key={nanoid()}>{extra}</DetailP>
         ))}
       </ExtraInfoDiv>
       <H3>Rental Conditions:</H3>
@@ -82,7 +82,7 @@ const CarDetails = ({ carCard }) => {
         {conditionsArray.map(condition => {
           const [label, value] = condition.split(":").map(item => item.trim());
           return (
-            <ConditionP key={nanoid}>
+            <ConditionP key={nanoid()}>
               {label} {isNaN(value) ? value : <ConditionSpan>{`: ${value}`}</ConditionSpan>}
             </ConditionP>
           );

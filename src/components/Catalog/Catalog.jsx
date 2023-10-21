@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
-import { fetchCatalogCars, perPage } from "../../servise/CatalogCarsApi";
+import { fetchCatalogCars, perPage } from "../../service/CatalogCarsApi";
 import CatalogList from "./CatalogList";
 import { Section, Btn } from "./Catalog.styled";
 
 const Catalog = () => {
   const [page, setPage] = useState(1);
-  // const [showModal, setShowModal] = useState(false);
-  // const [selectedCarCard, setSelectedCarCard] = useState("");
   const [catalogData, setCatalogData] = useState([]);
-  // const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchDataForPage = async page => {
     try {
       const data = await fetchCatalogCars(page, perPage);
+      if (data.length < perPage) {
+        setShowLoadMoreBtn(false);
+      }
       if (page === 1) {
         setCatalogData(data);
       } else {
@@ -24,7 +25,9 @@ const Catalog = () => {
       console.error(error);
     }
   };
-  console.log(catalogData);
+  // console.log(perPage);
+  console.log(catalogData.length);
+
   useEffect(() => {
     fetchDataForPage(page);
   }, [page]);
@@ -34,9 +37,14 @@ const Catalog = () => {
   };
   return (
     <Section>
-      {isLoading ? <p>Loading...</p> : <CatalogList data={catalogData} />}
-
-      <Btn onClick={handleLoadMore}>Load more</Btn>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : catalogData.length > 0 ? (
+        <CatalogList data={catalogData} />
+      ) : (
+        <p>No data available.</p>
+      )}
+      {showLoadMoreBtn && !isLoading && <Btn onClick={handleLoadMore}>Load more</Btn>}
     </Section>
   );
 };
