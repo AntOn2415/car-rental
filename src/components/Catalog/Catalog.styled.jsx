@@ -27,7 +27,7 @@ export const Btn = styled.button`
     color: #0b44cd;
   }
   &:disabled {
-    color: rgba(255, 255, 255, 0.8);
+    color: #dcebf7;
     cursor: not-allowed;
   }
 `;

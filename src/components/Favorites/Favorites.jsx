@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchCatalogCars, perPage } from "../../service/CatalogCarsApi";
+import { fetchCarAll } from "../../service/CatalogCarsApi";
 import { Section, CatalogUl, StyledLink } from "./Favorites.styled";
 import CatalogItem from "../Catalog/CatalogItem";
 import Spinner from "components/Spinner";
@@ -11,7 +11,7 @@ const Favorites = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await fetchCatalogCars(1, perPage);
+        const data = await fetchCarAll();
         const favorites = localStorage.getItem("favorites");
         const favoriteIds = favorites ? JSON.parse(favorites) : [];
         const filteredCatalogData = data.filter(car => favoriteIds.includes(car.id));

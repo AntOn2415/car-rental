@@ -18,5 +18,14 @@ async function fetchCatalogCars(page) {
   }
 }
 
-export { fetchCatalogCars };
+async function fetchCarAll() {
+  try {
+    const response = await axios.get(`${baseURL}/adverts`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export { fetchCatalogCars, fetchCarAll };
 export { perPage };

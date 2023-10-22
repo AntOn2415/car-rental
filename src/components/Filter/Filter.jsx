@@ -7,6 +7,9 @@ import {
   ContainerInputDiv,
   Select,
   Option,
+  Input,
+  InputTo,
+  FormBtn,
 } from "./Filter.styled";
 
 const Filter = ({ onFilterChange }) => {
@@ -15,8 +18,8 @@ const Filter = ({ onFilterChange }) => {
   const [minMileage, setMinMileage] = useState("");
   const [maxMileage, setMaxMileage] = useState("");
 
-  const makes = ["Make 1", "Make 2", "Make 3"]; // Ось ваш список марок автомобілів
-  const prices = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110]; // Ось ваш список цін за годину
+  const makes = ["Volvo", "HUMMER", "Mitsubishi"];
+  const prices = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110];
 
   const handleFilter = () => {
     const filter = {
@@ -46,22 +49,22 @@ const Filter = ({ onFilterChange }) => {
         <Select value={selectedPrice} onChange={e => setSelectedPrice(e.target.value)}>
           <Option value="">To $</Option>
           {prices.map(price => (
-            <option key={price} value={price}>
+            <Option key={price} value={price}>
               {`${price}`}
-            </option>
+            </Option>
           ))}
         </Select>
       </ContainerDiv>
       <ContainerDiv>
         <Label>Сar mileage / km</Label>
         <ContainerInputDiv>
-          <input
+          <Input
             type="number"
             placeholder="From"
             value={minMileage}
             onChange={e => setMinMileage(e.target.value)}
           />
-          <input
+          <InputTo
             type="number"
             placeholder="To"
             value={maxMileage}
@@ -70,7 +73,9 @@ const Filter = ({ onFilterChange }) => {
         </ContainerInputDiv>
       </ContainerDiv>
 
-      <button onClick={handleFilter}>Search</button>
+      <FormBtn type="submit" onClick={handleFilter} disabled={false}>
+        Search
+      </FormBtn>
     </FilterContainerDiv>
   );
 };

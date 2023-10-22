@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import { fetchCatalogCars, perPage } from "../../service/CatalogCarsApi";
 import CatalogList from "./CatalogList";
@@ -8,7 +8,9 @@ import Spinner from "components/Spinner";
 
 const Catalog = () => {
   const [page, setPage] = useState(1);
-  const [catalogData, setCatalogData] = useState([]);
+  const [catalogData, setCatalogData] = useState(() =>
+    JSON.parse(window.localStorage.getItem("catalogData") ?? "[]")
+  );
   const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -26,6 +28,7 @@ const Catalog = () => {
         } else {
           setCatalogData(prevData => [...prevData, ...data]);
         }
+
         setIsLoading(false);
         if (page > 1) {
           scrollToOldCatalog();
@@ -43,6 +46,10 @@ const Catalog = () => {
   const handleLoadMore = () => {
     setPage(prevPage => prevPage + 1);
   };
+
+  useEffect(() => {
+    window.localStorage.setItem("catalogData", JSON.stringify(catalogData));
+  }, [catalogData]);
 
   const scrollToOldCatalog = () => {
     scroll.scrollMore(600, {
