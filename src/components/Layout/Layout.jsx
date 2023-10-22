@@ -4,13 +4,14 @@ import { AppBar } from "../AppBar/AppBar";
 import { Suspense } from "react";
 
 import { ContainerDiv } from "./Layout.styled";
+import Spinner from "../Spinner";
 
 const Layout = () => {
   return (
     <>
       <AppBar />
       <ContainerDiv>
-        <Suspense fallback={"loading..."}>
+        <Suspense fallback={<Spinner />}>
           <Outlet />
         </Suspense>
       </ContainerDiv>

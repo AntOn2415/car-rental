@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchCatalogCars, perPage } from "../../service/CatalogCarsApi";
 import { Section, CatalogUl, StyledLink } from "./Favorites.styled";
 import CatalogItem from "../Catalog/CatalogItem";
+import Spinner from "components/Spinner";
 
 const Favorites = () => {
   const [favoriteCars, setFavoriteCars] = useState([]);
@@ -27,7 +28,7 @@ const Favorites = () => {
   return (
     <Section>
       {isLoading ? (
-        <p>Loading...</p>
+        <Spinner />
       ) : favoriteCars.length > 0 ? (
         <CatalogUl>
           {favoriteCars.map(car => (

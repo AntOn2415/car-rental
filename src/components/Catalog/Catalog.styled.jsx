@@ -26,4 +26,8 @@ export const Btn = styled.button`
   &:active {
     color: #0b44cd;
   }
+  &:disabled {
+    color: rgba(255, 255, 255, 0.8);
+    cursor: not-allowed;
+  }
 `;
