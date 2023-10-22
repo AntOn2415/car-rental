@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import { fetchCatalogCars, perPage } from "../../service/CatalogCarsApi";
 import CatalogList from "./CatalogList";
+import Filter from "components/Filter";
 import { Section, Btn } from "./Catalog.styled";
 import Spinner from "components/Spinner";
 
@@ -52,6 +53,7 @@ const Catalog = () => {
 
   return (
     <Section>
+      <Filter />
       {isLoading ? (
         <Spinner />
       ) : catalogData.length > 0 ? (
