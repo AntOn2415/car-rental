@@ -5,6 +5,7 @@ export const FilterContainerDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: end;
+  width: 1225px;
   gap: 18px;
 `;
 
