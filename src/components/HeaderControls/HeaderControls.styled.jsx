@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const ContainerDiv = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 15px;
-  margin-left: auto;
+  margin-top: auto;
 `;
 
 export const LinkDiv = styled.div`

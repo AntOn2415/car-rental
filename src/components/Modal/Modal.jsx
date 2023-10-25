@@ -26,7 +26,7 @@ function Modal({ children, onCloseModal, isOpenModal }) {
   return createPortal(
     <ModalBackdrop onClick={onCloseModal}>
       <ModalDiv onClick={handleContentClick}>
-        <CloseBtn type="button" aria-label="close button" onClick={onCloseModal}>
+        <CloseBtn type="button" aria-label="close button modal" onClick={onCloseModal}>
           <svg width="24" height="24">
             <use href={`${close}#icon-x`} />
           </svg>

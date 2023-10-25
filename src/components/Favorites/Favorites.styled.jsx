@@ -6,6 +6,7 @@ export const Section = styled.section`
   justify-content: center;
   flex-direction: column;
   padding-top: 50px;
+  padding-left: 220px;
 `;
 
 export const CatalogUl = styled.ul`

@@ -6,8 +6,8 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter basename="/">
-      {/* <BrowserRouter> */}
+    {/* <BrowserRouter basename="/"> */}
+    <BrowserRouter basename="/car-rental">
       <App />
     </BrowserRouter>
   </React.StrictMode>

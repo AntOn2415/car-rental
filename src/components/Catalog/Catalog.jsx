@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
-import { fetchCatalogCars, perPage } from "../../service/CatalogCarsApi";
+import { perPage } from "../../service/CatalogCarsApi";
+import { fetchCatalogCars } from "../../helpers/filters";
 import CatalogList from "./CatalogList";
-import Filter from "components/Filter";
+import FilterForm from "components/FilterForm";
 import { Section, Btn } from "./Catalog.styled";
 import Spinner from "components/Spinner";
 
@@ -14,12 +15,18 @@ const Catalog = () => {
   const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [filterData, setFilterData] = useState({});
+
+  const handleFilterChange = filter => {
+    setFilterData(filter);
+    setPage(1);
+  };
 
   useEffect(() => {
     const fetchDataForPage = async page => {
       try {
         setIsLoadingMore(true);
-        const data = await fetchCatalogCars(page, perPage);
+        const data = await fetchCatalogCars(page, perPage, filterData);
         if (data.length < perPage) {
           setShowLoadMoreBtn(false);
         }
@@ -41,7 +48,7 @@ const Catalog = () => {
     };
 
     fetchDataForPage(page);
-  }, [page]);
+  }, [filterData, page]);
 
   const handleLoadMore = () => {
     setPage(prevPage => prevPage + 1);
@@ -60,17 +67,23 @@ const Catalog = () => {
 
   return (
     <Section>
-      <Filter />
+      <FilterForm onFilterChange={handleFilterChange} isLoading={isLoading} />
       {isLoading ? (
         <Spinner />
       ) : catalogData.length > 0 ? (
         <CatalogList data={catalogData} />
       ) : (
-        <p>No data available.</p>
+        <p aria-label="No data available">No data available.</p>
       )}
       {showLoadMoreBtn && !isLoading && (
-        <Btn onClick={handleLoadMore} disabled={isLoadingMore}>
-          Load more
+        <Btn
+          type="button"
+          onClick={handleLoadMore}
+          disabled={isLoadingMore}
+          aria-label="Load more button"
+          aria-disabled={isLoadingMore ? "true" : "false"}
+        >
+          {!isLoadingMore ? "Load more" : "Loading..."}
         </Btn>
       )}
     </Section>

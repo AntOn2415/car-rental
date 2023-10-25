@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Section = styled.section`
   padding-top: 50px;
+  padding-left: 220px;
 `;
 
 export const Btn = styled.button`
@@ -29,5 +30,6 @@ export const Btn = styled.button`
   &:disabled {
     color: #dcebf7;
     cursor: not-allowed;
+    text-decoration-line: none;
   }
 `;

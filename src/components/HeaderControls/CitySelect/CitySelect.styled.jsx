@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
 export const CitySelectDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  margin-left: auto;
+  margin-bottom: 50px;
 `;
 
 export const Label = styled.label`
@@ -28,6 +24,7 @@ export const Select = styled.select`
   padding: 10px 14px;
   border: solid 1px #3470ff;
   color: #3470ff;
+  min-width: 160px;
   border-radius: 12px;
   outline: none;
 

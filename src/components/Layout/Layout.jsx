@@ -8,14 +8,12 @@ import Spinner from "../Spinner";
 
 const Layout = () => {
   return (
-    <>
+    <ContainerDiv>
       <AppBar />
-      <ContainerDiv>
-        <Suspense fallback={<Spinner />}>
-          <Outlet />
-        </Suspense>
-      </ContainerDiv>
-    </>
+      <Suspense fallback={<Spinner />}>
+        <Outlet />
+      </Suspense>
+    </ContainerDiv>
   );
 };
 

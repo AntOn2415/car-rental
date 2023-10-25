@@ -91,6 +91,7 @@ const CatalogItem = ({ carCard }) => {
             type="button"
             onClick={() => toggleFavorite(carCard.id)}
             data-is-favorite={isFavorite}
+            aria-label={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
           >
             <svg width="18" height="18">
               <use href={`${hart}#icon-hart`} />
@@ -116,7 +117,7 @@ const CatalogItem = ({ carCard }) => {
           <DetailP>{randomFeature}</DetailP>
         </CarSnapshotDiv>
 
-        <Btn type="button" onClick={handleButtonClick}>
+        <Btn type="button" onClick={handleButtonClick} aria-label="Learn more about this car">
           Learn more
         </Btn>
       </CardContainer>
