@@ -45,6 +45,10 @@ const FilterForm = ({ onFilterChange }) => {
   }, []);
 
   const handleFilter = async () => {
+    if (isSearching) {
+      return;
+    }
+
     setIsSearching(true);
 
     try {
@@ -54,6 +58,7 @@ const FilterForm = ({ onFilterChange }) => {
         minMileage,
         maxMileage,
       };
+
       await onFilterChange(filter);
     } catch (error) {
       console.error(error);
@@ -100,8 +105,17 @@ const FilterForm = ({ onFilterChange }) => {
     label: `${price}`,
   }));
 
+  const isFormEmpty = () => {
+    return selectedMake === "" && selectedPrice === "" && minMileage === "" && maxMileage === "";
+  };
+
   return (
-    <form>
+    <form
+      onSubmit={e => {
+        e.preventDefault();
+        handleFilter();
+      }}
+    >
       <FilterContainerDiv>
         <ContainerDiv>
           <Label htmlFor="makeSelect">Car brand:</Label>
@@ -165,13 +179,7 @@ const FilterForm = ({ onFilterChange }) => {
           </div>
         </ContainerDiv>
 
-        <FormBtn
-          type="button"
-          onClick={handleFilter}
-          aria-label="Search for cars"
-          aria-disabled={isSearching ? "true" : "false"}
-          disabled={isSearching}
-        >
+        <FormBtn type="submit" aria-label="Search for cars" disabled={isSearching || isFormEmpty()}>
           {isSearching ? "Searching..." : "Search"}
         </FormBtn>
       </FilterContainerDiv>
