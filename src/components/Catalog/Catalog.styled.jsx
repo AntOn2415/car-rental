@@ -33,3 +33,13 @@ export const Btn = styled.button`
     text-decoration-line: none;
   }
 `;
+
+export const P = styled.p`
+  text-align: center;
+  margin-top: 150px;
+  color: #343434;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: calc(44 / 40);
+`;

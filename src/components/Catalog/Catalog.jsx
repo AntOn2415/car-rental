@@ -4,7 +4,7 @@ import { perPage } from "../../service/CatalogCarsApi";
 import { fetchCatalogCars } from "../../helpers/filters";
 import CatalogList from "./CatalogList";
 import FilterForm from "components/FilterForm";
-import { Section, Btn } from "./Catalog.styled";
+import { Section, Btn, P } from "./Catalog.styled";
 import Spinner from "components/Spinner";
 
 const Catalog = () => {
@@ -73,7 +73,9 @@ const Catalog = () => {
       ) : catalogData.length > 0 ? (
         <CatalogList data={catalogData} />
       ) : (
-        <p aria-label="No data available">No data available.</p>
+        <P aria-label="No results found for your search criteria. Please try different filters or check back later.">
+          No cars match your search criteria. Please refine your filters or check again later.
+        </P>
       )}
       {showLoadMoreBtn && !isLoading && (
         <Btn

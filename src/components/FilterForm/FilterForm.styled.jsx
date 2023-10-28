@@ -85,7 +85,7 @@ export const ContainerSvg = styled.div`
   transform-origin: center;
 
   &[data-is-active="true"] {
-    transform: rotateX(180deg);
+    transform: rotate(180deg);
   }
 `;
 

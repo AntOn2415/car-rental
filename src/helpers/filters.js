@@ -1,6 +1,6 @@
 import { fetchCarAll } from "../service/CatalogCarsApi";
 
-export async function fetchCarMakes() {
+export async function fetchCarMakesList() {
   try {
     const allCars = await fetchCarAll();
     const allMakes = allCars.map(advertisement => advertisement.make);
@@ -12,7 +12,7 @@ export async function fetchCarMakes() {
   }
 }
 
-export async function fetchCarPrices() {
+export async function fetchCarPricesList() {
   try {
     const allCars = await fetchCarAll();
     const allPrices = allCars.map(advertisement => {
@@ -42,10 +42,9 @@ export async function fetchCatalogCars(page, perPage, filterData) {
         min: filterData.price,
         max: filterData.price + 10,
       };
-
       filteredCars = filteredCars.filter(advertisement => {
         const price = parseInt(advertisement.rentalPrice.replace("$", ""), 10);
-        return price >= priceRange.min && price < priceRange.max;
+        return price >= priceRange.min && price <= priceRange.max;
       });
     }
     if (filterData.minMileage) {

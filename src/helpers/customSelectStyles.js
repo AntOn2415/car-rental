@@ -20,17 +20,25 @@ export const customSelectStyles = {
 
   valueContainer: baseStyles => ({
     ...baseStyles,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     margin: "0",
     padding: "14px 18px",
+    height: "48px",
+    width: "165px",
   }),
 
   input: baseStyles => ({
     ...baseStyles,
-    width: "165px",
     margin: "0",
     padding: "0",
   }),
-
+  multiValueGeneric: baseStyles => ({
+    ...baseStyles,
+    color: "red",
+  }),
   singleValue: baseStyles => ({ ...baseStyles, width: "165px", margin: "0" }),
 
   placeholder: baseStyles => ({
