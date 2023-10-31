@@ -51,21 +51,26 @@ export async function fetchCatalogCarsFiltered(page, perPage, filterData) {
       filteredCars = filteredCars.filter(advertisement => advertisement.make === filterData.make);
     }
 
-    if (Array.isArray(filterData.price) && filterData.price.length === 2) {
-      // Якщо вибрано діапазон прайсу
+    if (filterData.price.length === 1) {
+      const selectedPrice = filterData.price[0];
       const priceRange = {
-        min: filterData.price[0],
-        max: filterData.price[1],
+        min: selectedPrice,
+        max: selectedPrice + 10,
       };
       filteredCars = filteredCars.filter(advertisement => {
         const price = parseInt(advertisement.rentalPrice.replace("$", ""), 10);
         return price >= priceRange.min && price <= priceRange.max;
       });
-    } else if (filterData.price.length === 1) {
-      // Якщо вибрано одне число
+    } else if (filterData.price.length >= 2) {
+      const minPrice = Math.min(...filterData.price);
+      const maxPrice = Math.max(...filterData.price);
+      const priceRange = {
+        min: minPrice,
+        max: maxPrice,
+      };
       filteredCars = filteredCars.filter(advertisement => {
         const price = parseInt(advertisement.rentalPrice.replace("$", ""), 10);
-        return price === filterData.price[0];
+        return price >= priceRange.min && price <= priceRange.max;
       });
     }
 
