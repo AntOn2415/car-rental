@@ -35,10 +35,7 @@ export const customSelectStyles = {
     margin: "0",
     padding: "0",
   }),
-  multiValueGeneric: baseStyles => ({
-    ...baseStyles,
-    color: "red",
-  }),
+
   singleValue: baseStyles => ({ ...baseStyles, width: "165px", margin: "0" }),
 
   placeholder: baseStyles => ({
@@ -56,7 +53,7 @@ export const customSelectStyles = {
     zIndex: "999",
     display: "inline-flex",
     padding: "0 8px 0 18px",
-    height: "272px",
+    maxHeight: "272px",
     borderRadius: "14px",
     border: "1px solid rgba(18, 20, 23, 0.05)",
     boxShadow: "0px 4px 36px 0px rgba(0, 0, 0, 0.02)",
@@ -64,14 +61,9 @@ export const customSelectStyles = {
   }),
   menuList: baseStyles => ({
     ...baseStyles,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-    gap: "8px",
-    width: "100%",
+    padding: "0 8px 14px 0",
     background: "#fff",
-    padding: "200px 8px 14px 0",
+
     "&::-webkit-scrollbar": {
       width: "8px",
       height: "130px",
@@ -90,6 +82,7 @@ export const customSelectStyles = {
     display: "inline-flex",
     width: "100%",
     padding: "0",
+    marginTop: "8px",
     color: "rgba(18, 20, 23, 0.2)",
     fontFamily: "Manrope",
     fontSize: "16px",

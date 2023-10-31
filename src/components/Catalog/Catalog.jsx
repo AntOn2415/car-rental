@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import { perPage } from "../../service/CatalogCarsApi";
-import { fetchCatalogCars } from "../../helpers/filters";
+import { fetchCatalogCarsFiltered } from "../../helpers/filters";
+import { fetchCatalogCars } from "../../service/CatalogCarsApi";
 import CatalogList from "./CatalogList";
-import FilterForm from "components/FilterForm";
+import FilterForm from "../FilterForm/FilterForm";
 import { Section, Btn, P } from "./Catalog.styled";
 import Spinner from "components/Spinner";
 
@@ -26,10 +27,19 @@ const Catalog = () => {
     const fetchDataForPage = async page => {
       try {
         setIsLoadingMore(true);
-        const data = await fetchCatalogCars(page, perPage, filterData);
+
+        let data;
+
+        if (Object.keys(filterData).length > 0) {
+          data = await fetchCatalogCarsFiltered(page, perPage, filterData);
+        } else {
+          data = await fetchCatalogCars(page);
+        }
+
         if (data.length < perPage) {
           setShowLoadMoreBtn(false);
         }
+
         if (page === 1) {
           setCatalogData(data);
         } else {
@@ -37,6 +47,7 @@ const Catalog = () => {
         }
 
         setIsLoading(false);
+
         if (page > 1) {
           scrollToOldCatalog();
         }

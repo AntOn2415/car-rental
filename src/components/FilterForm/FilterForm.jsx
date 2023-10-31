@@ -48,17 +48,21 @@ const FilterForm = ({ onFilterChange }) => {
     if (isSearching) {
       return;
     }
-
     setIsSearching(true);
-
     try {
       const filter = {
         make: selectedMake,
-        price: selectedPrice,
+        price: [selectedPrice],
         minMileage,
         maxMileage,
       };
+      console.log(selectedPrice);
 
+      if (selectedPrice) {
+        // Якщо вибрано діапазон прайсу
+        filter.price = selectedPrice.map(option => option.value);
+      }
+      console.log(selectedPrice);
       await onFilterChange(filter);
     } catch (error) {
       console.error(error);
@@ -66,6 +70,7 @@ const FilterForm = ({ onFilterChange }) => {
       setIsSearching(false);
     }
   };
+
   const handleMinMileageChange = e => {
     const value = Number(e.target.value);
 
@@ -88,6 +93,10 @@ const FilterForm = ({ onFilterChange }) => {
       console.error("Некоректний ввід для максимального пробігу");
       setMaxMileageError(true);
     }
+  };
+
+  const handlePriceChange = selectedOptions => {
+    setSelectedPrice(selectedOptions);
   };
 
   const makeOptions = makes.map(make => ({
@@ -135,7 +144,7 @@ const FilterForm = ({ onFilterChange }) => {
           <Select
             id="priceSelect"
             value={priceOptions.find(option => option.value === selectedPrice)}
-            onChange={selectedOption => setSelectedPrice(selectedOption.value)}
+            onChange={handlePriceChange}
             options={priceOptions}
             placeholder="To $"
             styles={customSelectStyles}
