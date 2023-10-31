@@ -76,6 +76,23 @@ export const customSelectStyles = {
       borderRadius: "10px",
     },
   }),
+  multiValue: baseStyles => ({
+    ...baseStyles,
+    margin: "0",
+    padding: "0",
+    background: "transparent",
+    color: "#121417",
+    fontSize: "18px",
+    fontStyle: "normal",
+    fontWeight: "500",
+    lineHeight: "calc(20 / 18)",
+  }),
+  MultiValueGeneric: baseStyles => ({
+    ...baseStyles,
+    margin: "0",
+    padding: "120px",
+    color: "red",
+  }),
 
   option: baseStyles => ({
     ...baseStyles,
