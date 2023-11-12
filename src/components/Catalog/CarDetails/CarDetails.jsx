@@ -44,9 +44,9 @@ const CarDetails = ({ carCard }) => {
     address,
   } = carCard;
 
-  const addressParts = address.split(", ");
+  const addressParts = carCard && address ? address.split(", ") : [];
   const mergedArray = [...accessories, ...functionalities];
-  const conditionsArray = rentalConditions.split("\n");
+  const conditionsArray = rentalConditions ? rentalConditions.split("\n") : [];
   const rearrangedPrice = rentalPrice.replace("$", "") + "$";
 
   return (
