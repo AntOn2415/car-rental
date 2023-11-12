@@ -15,7 +15,6 @@ const Favorites = () => {
 
   useEffect(() => {
     updateFavoriteCars();
-    setIsLoading(false);
   }, []);
 
   const removeFromFavorites = car => {
@@ -25,25 +24,28 @@ const Favorites = () => {
     updateFavoriteCars();
   };
 
+  console.log(favoriteCars);
+
+  if (isLoading || favoriteCars.length === 0) {
+    return (
+      <Section>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <p>Your favorite cars list is empty. Start browsing and add cars to your favorites.</p>
+        )}
+        {!isLoading && <StyledLink to="/catalog">Back to Catalog</StyledLink>}
+      </Section>
+    );
+  }
+
   return (
     <Section>
-      {isLoading ? (
-        <Spinner />
-      ) : favoriteCars.length > 0 ? (
-        <CatalogUl>
-          {favoriteCars && favoriteCars.length > 0 ? (
-            favoriteCars.map((car, index) => (
-              <CatalogItem key={index} carCard={car} removeFromFavorites={removeFromFavorites} />
-            ))
-          ) : (
-            <p>Your favorite cars list is empty. Start browsing and add cars to your favorites.</p>
-          )}
-        </CatalogUl>
-      ) : (
-        <>
-          <p>Your favorite cars list is empty. Start browsing and add cars to your favorites.</p>
-        </>
-      )}
+      <CatalogUl>
+        {favoriteCars.map((car, index) => (
+          <CatalogItem key={index} carCard={car} removeFromFavorites={removeFromFavorites} />
+        ))}
+      </CatalogUl>
       {!isLoading && <StyledLink to="/catalog">Back to Catalog</StyledLink>}
     </Section>
   );
