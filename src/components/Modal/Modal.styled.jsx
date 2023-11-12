@@ -1,9 +1,61 @@
-import styled, { keyframes } from "styled-components";
-import { fadeIn, zoomIn } from "react-animations";
+import styled, { keyframes, css } from "styled-components";
 
-const fadeInAnimation = keyframes`${fadeIn}`;
+export const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
-const zoomInAnimation = keyframes`${zoomIn}`;
+export const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+export const zoomIn = keyframes`
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+`;
+
+export const zoomOut = keyframes`
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+`;
+
+const getAnimationStyles = (props, duration = "300ms") => {
+  if (props["data-animation"] === "fadeIn") {
+    return css`
+      animation: ${fadeIn} ${duration} forwards;
+    `;
+  } else if (props["data-animation"] === "fadeOut") {
+    return css`
+      animation: ${fadeOut} ${duration} forwards;
+    `;
+  } else if (props["data-animation"] === "zoomIn") {
+    return css`
+      animation: ${zoomIn} ${duration} forwards;
+    `;
+  } else if (props["data-animation"] === "zoomOut") {
+    return css`
+      animation: ${zoomOut} ${duration} forwards;
+    `;
+  }
+  return "";
+};
 
 export const ModalBackdrop = styled.div`
   position: fixed;
@@ -19,8 +71,7 @@ export const ModalBackdrop = styled.div`
   z-index: 998;
   overflow-y: scroll;
   overflow: hidden;
-
-  animation: 500ms ${fadeInAnimation};
+  ${getAnimationStyles};
 `;
 
 export const ModalDiv = styled.div`
@@ -30,8 +81,7 @@ export const ModalDiv = styled.div`
   border-radius: 24px;
   background: #fff;
   overflow: scroll;
-
-  animation: 300ms ${zoomInAnimation};
+  ${getAnimationStyles};
 `;
 
 export const CloseBtn = styled.button`
@@ -51,9 +101,10 @@ export const CloseBtn = styled.button`
   outline: none;
   border: none;
   transition: stroke 300ms ease;
+  cursor: pointer;
 
-  :hover,
-  :focus {
+  &:hover,
+  &:focus {
     stroke: #3470ff;
   }
 `;

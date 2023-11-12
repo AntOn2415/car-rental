@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const CitySelectDiv = styled.div`
+  position: relative;
   margin-bottom: 50px;
 `;
 
@@ -17,22 +18,18 @@ export const Label = styled.label`
   margin: -1px;
 `;
 
-export const Select = styled.select`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 14px;
-  border: solid 1px #3470ff;
-  color: #3470ff;
-  min-width: 160px;
-  border-radius: 12px;
-  outline: none;
+export const ContainerSvg = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 130px;
+  height: 20px;
+  stroke: #121417;
+  fill: none;
+  pointer-events: none;
+  transition: transform 300ms ease;
+  transform-origin: center;
 
-  transition: color 300ms ease, border 300ms ease;
-
-  &:hover,
-  &:focus {
-    border: solid 1px #0b44cd;
-    color: #0b44cd;
+  &[data-is-active="true"] {
+    transform: rotate(180deg);
   }
 `;

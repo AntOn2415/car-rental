@@ -10,17 +10,17 @@ import Spinner from "components/Spinner";
 
 const Catalog = () => {
   const [page, setPage] = useState(1);
-  const [catalogData, setCatalogData] = useState(() =>
-    JSON.parse(window.localStorage.getItem("catalogData") ?? "[]")
-  );
+  const [catalogData, setCatalogData] = useState([]);
   const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSearching, setIsSearching] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [filterData, setFilterData] = useState({});
 
   const handleFilterChange = filter => {
     setFilterData(filter);
     setPage(1);
+    setIsSearching(true);
   };
 
   useEffect(() => {
@@ -47,6 +47,7 @@ const Catalog = () => {
         }
 
         setIsLoading(false);
+        setIsSearching(false);
 
         if (page > 1) {
           scrollToOldCatalog();
@@ -65,10 +66,6 @@ const Catalog = () => {
     setPage(prevPage => prevPage + 1);
   };
 
-  useEffect(() => {
-    window.localStorage.setItem("catalogData", JSON.stringify(catalogData));
-  }, [catalogData]);
-
   const scrollToOldCatalog = () => {
     scroll.scrollMore(600, {
       duration: 500,
@@ -78,7 +75,7 @@ const Catalog = () => {
 
   return (
     <Section>
-      <FilterForm onFilterChange={handleFilterChange} isLoading={isLoading} />
+      <FilterForm onFilterChange={handleFilterChange} isSearching={isSearching} />
       {isLoading ? (
         <Spinner />
       ) : catalogData.length > 0 ? (

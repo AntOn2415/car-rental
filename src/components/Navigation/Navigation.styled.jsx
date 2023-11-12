@@ -14,7 +14,6 @@ export const NavUl = styled.ul`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
 `;
 
 export const NavLi = styled.li`
@@ -24,6 +23,7 @@ export const NavLi = styled.li`
 export const StyledLinkLogo = styled(NavLink)`
   display: flex;
   text-decoration: none;
+  margin-bottom: 30px;
 `;
 
 export const StyledLink = styled(NavLink)`
@@ -36,6 +36,7 @@ export const StyledLink = styled(NavLink)`
   width: 140px;
   padding: 10px;
   transition: color 300ms ease;
+  margin-bottom: 15px;
 
   &:hover,
   &:focus,

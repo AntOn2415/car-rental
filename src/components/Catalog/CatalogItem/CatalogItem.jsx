@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Modal from "../../Modal";
 import CarDetails from "../CarDetails";
 import hart from "../../../images/icons.svg";
@@ -44,7 +44,7 @@ const CatalogItem = ({ carCard, removeFromFavorites }) => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
-  const toggleFavorite = carCard => {
+  const toggleFavorite = useCallback(() => {
     const favorites = getFavoritesFromStorage();
     const carId = carCard.id;
 
@@ -58,15 +58,17 @@ const CatalogItem = ({ carCard, removeFromFavorites }) => {
       saveFavoritesToStorage(updatedFavorites);
     }
 
-    setIsFavorite(!isFavorite);
-  };
+    setIsFavorite(prev => !prev);
+  }, [carCard, setIsFavorite]);
 
   const handleButtonClick = () => {
     setIsOpenModal(true);
   };
 
   const handleCloseModal = () => {
-    setIsOpenModal(false);
+    if (isOpenModal) {
+      setIsOpenModal(prevState => !prevState);
+    }
   };
 
   const {
@@ -93,7 +95,7 @@ const CatalogItem = ({ carCard, removeFromFavorites }) => {
           <ToggleEventBtn
             type="button"
             onClick={() => {
-              toggleFavorite(carCard);
+              toggleFavorite();
               if (removeFromFavorites) {
                 removeFromFavorites(carCard);
               }
@@ -131,7 +133,7 @@ const CatalogItem = ({ carCard, removeFromFavorites }) => {
       </CardContainer>
       {isOpenModal && (
         <Modal isOpenModal={isOpenModal} onCloseModal={handleCloseModal}>
-          <CarDetails carCard={carCard} onCloseModal={handleCloseModal} />
+          <CarDetails carCard={carCard} />
         </Modal>
       )}
     </CatalogLi>

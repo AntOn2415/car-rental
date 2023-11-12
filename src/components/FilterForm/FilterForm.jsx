@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useCity } from "hooks/CityProvider";
 import Select from "react-select";
 import { fetchCarMakesList, fetchCarPricesList } from "../../helpers/filters";
 import iconChevron from "../../images/icons.svg";
@@ -16,9 +17,9 @@ import {
 } from "./FilterForm.styled";
 import { customSelectStyles } from "../../helpers/customSelectStyles";
 
-const FilterForm = ({ onFilterChange }) => {
+const FilterForm = ({ onFilterChange, isSearching }) => {
   const [selectedMake, setSelectedMake] = useState("");
-  const [selectedPrice, setSelectedPrice] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState([]);
   const [minMileage, setMinMileage] = useState("");
   const [maxMileage, setMaxMileage] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,7 +27,7 @@ const FilterForm = ({ onFilterChange }) => {
   const [prices, setPrices] = useState([]);
   const [minMileageError, setMinMileageError] = useState(false);
   const [maxMileageError, setMaxMileageError] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
+  const { selectedCity } = useCity();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,30 +46,33 @@ const FilterForm = ({ onFilterChange }) => {
   }, []);
 
   const handleFilter = async () => {
-    if (isSearching) {
-      return;
-    }
-    setIsSearching(true);
     try {
       const filter = {
+        city: selectedCity,
         make: selectedMake,
-        price: [selectedPrice],
+        price: selectedPrice.map(option => option.value),
         minMileage,
         maxMileage,
       };
-      console.log(selectedPrice);
 
-      if (selectedPrice) {
-        // Якщо вибрано діапазон прайсу
-        filter.price = selectedPrice.map(option => option.value);
-      }
-      console.log(selectedPrice);
       await onFilterChange(filter);
     } catch (error) {
       console.error(error);
-    } finally {
-      setIsSearching(false);
     }
+  };
+
+  useEffect(() => {
+    handleFilter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCity]);
+
+  const handleResetFilter = () => {
+    setSelectedMake("");
+    setSelectedPrice([]);
+    setMinMileage("");
+    setMaxMileage("");
+    setMinMileageError(false);
+    setMaxMileageError(false);
   };
 
   const handleMinMileageChange = e => {
@@ -95,10 +99,6 @@ const FilterForm = ({ onFilterChange }) => {
     }
   };
 
-  const handlePriceChange = selectedOptions => {
-    setSelectedPrice(selectedOptions);
-  };
-
   const makeOptions = makes.map(make => ({
     value: make,
     label: make,
@@ -110,7 +110,29 @@ const FilterForm = ({ onFilterChange }) => {
   }));
 
   const isFormEmpty = () => {
-    return selectedMake === "" && selectedPrice === "" && minMileage === "" && maxMileage === "";
+    return (
+      selectedMake === "" &&
+      Array.isArray(selectedPrice) &&
+      selectedPrice.length === 0 &&
+      minMileage === "" &&
+      maxMileage === ""
+    );
+  };
+
+  const handleInputChange = (inputValue, { action }) => {
+    if (action === "input-change") {
+      const sanitizedValue = inputValue.replace(/[^0-9]/g, "");
+      const nearestLowerTen = Math.floor(sanitizedValue / 10) * 10;
+
+      const newOptions = [
+        { value: nearestLowerTen, label: `${nearestLowerTen}` },
+        { value: nearestLowerTen + 10, label: `${nearestLowerTen + 10}` },
+      ];
+
+      setSelectedPrice(newOptions);
+      return sanitizedValue;
+    }
+    return inputValue;
   };
 
   return (
@@ -125,8 +147,8 @@ const FilterForm = ({ onFilterChange }) => {
           <Label htmlFor="makeSelect">Car brand:</Label>
           <Select
             id="makeSelect"
-            value={makeOptions.find(option => option.value === selectedMake)}
-            onChange={selectedOption => setSelectedMake(selectedOption.value)}
+            value={selectedMake ? makeOptions.find(option => option.value === selectedMake) : null}
+            onChange={selectedOption => setSelectedMake(selectedOption)}
             options={makeOptions}
             placeholder="Enter the text"
             styles={customSelectStyles}
@@ -143,14 +165,15 @@ const FilterForm = ({ onFilterChange }) => {
           <Label htmlFor="priceSelect">Price/1 hour</Label>
           <Select
             id="priceSelect"
-            value={priceOptions.find(option => option.value === selectedPrice)}
-            onChange={handlePriceChange}
+            value={selectedPrice}
+            onChange={selectedOptions => setSelectedPrice(selectedOptions)}
             options={priceOptions}
             placeholder="To $"
             styles={customSelectStyles}
             onMenuOpen={() => setIsMenuOpen("priceSelect")}
             onMenuClose={() => setIsMenuOpen(false)}
             isMulti
+            onInputChange={handleInputChange}
           />
           <ContainerSvg data-is-active={isMenuOpen === "priceSelect"}>
             <svg width="20" height="20">
@@ -188,6 +211,14 @@ const FilterForm = ({ onFilterChange }) => {
 
         <FormBtn type="submit" aria-label="Search for cars" disabled={isSearching || isFormEmpty()}>
           {isSearching ? "Searching..." : "Search"}
+        </FormBtn>
+        <FormBtn
+          type="button"
+          aria-label="Reset Filters"
+          disabled={isFormEmpty()}
+          onClick={handleResetFilter}
+        >
+          Reset Filters
         </FormBtn>
       </FilterContainerDiv>
     </form>

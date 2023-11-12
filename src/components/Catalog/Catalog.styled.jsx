@@ -17,7 +17,7 @@ export const Btn = styled.button`
   font-weight: 500;
   line-height: calc(24 / 16); /* 150% */
   text-decoration-line: underline;
-  margin: 100px auto 150px auto;
+  margin: 0 auto 150px auto;
   cursor: pointer;
 
   transition: color 300ms ease;
