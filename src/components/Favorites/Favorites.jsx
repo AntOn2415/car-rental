@@ -10,6 +10,7 @@ const Favorites = () => {
   const updateFavoriteCars = () => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavoriteCars(favorites);
+    setIsLoading(false);
   };
 
   useEffect(() => {
