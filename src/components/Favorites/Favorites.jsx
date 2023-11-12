@@ -24,8 +24,6 @@ const Favorites = () => {
     updateFavoriteCars();
   };
 
-  console.log(favoriteCars);
-
   if (isLoading || favoriteCars.length === 0) {
     return (
       <Section>
