@@ -30,9 +30,13 @@ const Favorites = () => {
         <Spinner />
       ) : favoriteCars.length > 0 ? (
         <CatalogUl>
-          {favoriteCars.map((car, index) => (
-            <CatalogItem key={index} carCard={car} removeFromFavorites={removeFromFavorites} />
-          ))}
+          {favoriteCars && favoriteCars.length > 0 ? (
+            favoriteCars.map((car, index) => (
+              <CatalogItem key={index} carCard={car} removeFromFavorites={removeFromFavorites} />
+            ))
+          ) : (
+            <p>Your favorite cars list is empty. Start browsing and add cars to your favorites.</p>
+          )}
         </CatalogUl>
       ) : (
         <>
