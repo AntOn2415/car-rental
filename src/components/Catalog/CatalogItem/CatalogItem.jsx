@@ -31,6 +31,10 @@ const CatalogItem = ({ carCard, removeFromFavorites }) => {
 
   function getRandomValue(arr1, arr2) {
     const randomArray = Math.random() < 0.5 ? arr1 : arr2;
+    if (!Array.isArray(randomArray) || randomArray.length === 0) {
+      return null;
+    }
+
     const randomIndex = Math.floor(Math.random() * randomArray.length);
     return randomArray[randomIndex];
   }
