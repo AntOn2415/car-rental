@@ -90,7 +90,7 @@ const CatalogItem = ({ carCard, removeFromFavorites }) => {
   } = carCard;
 
   const randomFeature = getRandomValue(accessories, functionalities);
-  const addressParts = carCard.address.split(", ");
+  const addressParts = carCard && carCard.address ? carCard.address.split(", ") : [];
 
   return (
     <CatalogLi>
