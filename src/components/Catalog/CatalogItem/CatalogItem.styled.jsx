@@ -26,23 +26,23 @@ export const ToggleEventBtn = styled.button`
   top: 14px;
   right: 14px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   width: 18px;
   height: 18px;
   padding: 0;
   margin: 0;
   background: transparent;
-  font-size: 60px;
   outline: none;
   border: none;
   cursor: pointer;
+  transition: width 300ms ease, height 300ms ease;
 
   stroke: ${props =>
     props["data-is-favorite"] ? "rgba(52, 112, 255, 1)" : "rgba(255, 255, 255, 0.8)"};
   fill: ${props => (props["data-is-favorite"] ? "rgba(52, 112, 255, 1)" : "transparent")};
 
   svg {
+    width: 100%;
+    height: 100%;
     use {
       transition: stroke 300ms ease, fill 300ms ease;
     }
@@ -50,6 +50,11 @@ export const ToggleEventBtn = styled.button`
 
   &:hover svg use {
     fill: #fff;
+  }
+
+  &:hover {
+    width: 25px;
+    height: 25px;
   }
 `;
 

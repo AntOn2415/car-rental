@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { fetchCarAll } from "../../service/CatalogCarsApi";
+import React, { useEffect, useState } from "react";
 import { Section, CatalogUl, StyledLink } from "./Favorites.styled";
 import CatalogItem from "../Catalog/CatalogItem";
 import Spinner from "components/Spinner";
@@ -8,22 +7,22 @@ const Favorites = () => {
   const [favoriteCars, setFavoriteCars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await fetchCarAll();
-        const favorites = localStorage.getItem("favorites");
-        const favoriteIds = favorites ? JSON.parse(favorites) : [];
-        const filteredCatalogData = data.filter(car => favoriteIds.includes(car.id));
-        setFavoriteCars(filteredCatalogData);
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    }
+  const updateFavoriteCars = () => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavoriteCars(favorites);
+  };
 
-    fetchData();
+  useEffect(() => {
+    updateFavoriteCars();
+    setIsLoading(false);
   }, []);
+
+  const removeFromFavorites = car => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const updatedFavorites = favorites.filter(fav => fav.id !== car.id);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    updateFavoriteCars();
+  };
 
   return (
     <Section>
@@ -31,8 +30,8 @@ const Favorites = () => {
         <Spinner />
       ) : favoriteCars.length > 0 ? (
         <CatalogUl>
-          {favoriteCars.map(car => (
-            <CatalogItem key={car.id} carCard={car} />
+          {favoriteCars.map((car, index) => (
+            <CatalogItem key={index} carCard={car} removeFromFavorites={removeFromFavorites} />
           ))}
         </CatalogUl>
       ) : (

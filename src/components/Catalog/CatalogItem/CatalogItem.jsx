@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Modal from "../../Modal";
 import CarDetails from "../CarDetails";
 import hart from "../../../images/icons.svg";
@@ -20,13 +20,13 @@ import {
   Btn,
 } from "./CatalogItem.styled";
 
-const CatalogItem = ({ carCard }) => {
+const CatalogItem = ({ carCard, removeFromFavorites }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const favorites = getFavoritesFromStorage();
-    setIsFavorite(favorites.includes(carCard.id));
+    setIsFavorite(favorites.some(fav => fav.id === carCard.id));
   }, [carCard]);
 
   function getRandomValue(arr1, arr2) {
@@ -36,34 +36,39 @@ const CatalogItem = ({ carCard }) => {
   }
 
   const getFavoritesFromStorage = () => {
-    const favorites = localStorage.getItem("favorites");
-    return favorites ? JSON.parse(favorites) : [];
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    return favorites;
   };
 
   const saveFavoritesToStorage = favorites => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
-  const toggleFavorite = carId => {
+  const toggleFavorite = useCallback(() => {
     const favorites = getFavoritesFromStorage();
+    const carId = carCard.id;
 
-    if (favorites.includes(carId)) {
-      const updatedFavorites = favorites.filter(id => id !== carId);
+    const isAlreadyFavorite = favorites.some(fav => fav.id === carId);
+
+    if (isAlreadyFavorite) {
+      const updatedFavorites = favorites.filter(fav => fav.id !== carId);
       saveFavoritesToStorage(updatedFavorites);
     } else {
-      const updatedFavorites = [...favorites, carId];
+      const updatedFavorites = [...favorites, carCard];
       saveFavoritesToStorage(updatedFavorites);
     }
 
-    setIsFavorite(!isFavorite);
-  };
+    setIsFavorite(prev => !prev);
+  }, [carCard, setIsFavorite]);
 
   const handleButtonClick = () => {
     setIsOpenModal(true);
   };
 
   const handleCloseModal = () => {
-    setIsOpenModal(false);
+    if (isOpenModal) {
+      setIsOpenModal(prevState => !prevState);
+    }
   };
 
   const {
@@ -89,10 +94,16 @@ const CatalogItem = ({ carCard }) => {
         <ImageContainer>
           <ToggleEventBtn
             type="button"
-            onClick={() => toggleFavorite(carCard.id)}
+            onClick={() => {
+              toggleFavorite();
+              if (removeFromFavorites) {
+                removeFromFavorites(carCard);
+              }
+            }}
             data-is-favorite={isFavorite}
+            aria-label={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
           >
-            <svg width="18" height="18">
+            <svg>
               <use href={`${hart}#icon-hart`} />
             </svg>
           </ToggleEventBtn>
@@ -116,13 +127,13 @@ const CatalogItem = ({ carCard }) => {
           <DetailP>{randomFeature}</DetailP>
         </CarSnapshotDiv>
 
-        <Btn type="button" onClick={handleButtonClick}>
+        <Btn type="button" onClick={handleButtonClick} aria-label="Learn more about this car">
           Learn more
         </Btn>
       </CardContainer>
       {isOpenModal && (
         <Modal isOpenModal={isOpenModal} onCloseModal={handleCloseModal}>
-          <CarDetails carCard={carCard} onCloseModal={handleCloseModal} />
+          <CarDetails carCard={carCard} />
         </Modal>
       )}
     </CatalogLi>

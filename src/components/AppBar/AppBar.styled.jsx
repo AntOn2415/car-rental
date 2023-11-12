@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
-export const Header = styled.div``;
+export const Header = styled.div`
+  position: fixed;
+`;
 
 export const HeaderContainer = styled.div`
   display: flex;
-  max-width: 1440px;
-  margin-right: auto;
-  margin-left: auto;
-
+  flex-direction: column;
+  border-right: 1px solid #c3c3c3;
+  width: 160px;
+  height: 100vh;
   background-color: #f7f7fb;
-  padding: 0 30px;
-  height: 80px;
+  padding: 20px;
 `;

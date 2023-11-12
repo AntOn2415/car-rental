@@ -8,6 +8,7 @@ export const ContainerDiv = styled.div`
   margin: auto;
   flex-direction: column;
   padding: 30px;
+  padding-left: 200px;
   border-color: #777;
 `;
 

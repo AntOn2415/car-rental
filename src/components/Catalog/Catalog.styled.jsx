@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Section = styled.section`
   padding-top: 50px;
+  padding-left: 220px;
 `;
 
 export const Btn = styled.button`
@@ -16,7 +17,7 @@ export const Btn = styled.button`
   font-weight: 500;
   line-height: calc(24 / 16); /* 150% */
   text-decoration-line: underline;
-  margin: 100px auto 150px auto;
+  margin: 0 auto 150px auto;
   cursor: pointer;
 
   transition: color 300ms ease;
@@ -29,5 +30,16 @@ export const Btn = styled.button`
   &:disabled {
     color: #dcebf7;
     cursor: not-allowed;
+    text-decoration-line: none;
   }
+`;
+
+export const P = styled.p`
+  text-align: center;
+  margin-top: 150px;
+  color: #343434;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: calc(44 / 40);
 `;
